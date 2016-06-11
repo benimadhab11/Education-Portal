@@ -1,0 +1,223 @@
+{% load static from staticfiles %}
+
+<html>
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<style> 
+
+input[type=text] {
+    width: 650px;
+    margin-top: 80px;
+    margin-left: 350px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 12px 10px 12px 40px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+
+</style>
+
+
+
+<script type="text/javascript">
+$(function() {
+    var availableTags = [];
+
+      {% for i in cat %}
+availableTags.push("{{i.sname}}");
+	{% endfor %}
+
+    $( "#tags" ).autocomplete({
+      source: availableTags
+    });
+  });
+</script>
+
+<style type="text/css">
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  color: #3b3b3b;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+  background: #D3D3D3;
+}
+
+.wrapper {
+  margin: 0 auto;
+  padding: 40px;
+  max-width: 800px;
+}
+
+.table {
+  margin: 0 0 40px 0;
+  width: 100%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  display: table;
+}
+@media screen and (max-width: 580px) {
+  .table {
+    display: block;
+  }
+}
+
+.row {
+  display: table-row;
+  background: #f6f6f6;
+}
+.row:nth-of-type(odd) {
+  background: #e9e9e9;
+}
+.row.header {
+  font-weight: 900;
+  color: #ffffff;
+  background: #ea6153;
+}
+.row.green {
+  background: #27ae60;
+}
+.row.blue {
+  background: #2980b9;
+}
+@media screen and (max-width: 580px) {
+  .row {
+    padding: 8px 0;
+    display: block;
+  }
+}
+
+.cell {
+  padding: 6px 12px;
+  display: table-cell;
+}
+@media screen and (max-width: 580px) {
+  .cell {
+    padding: 2px 12px;
+    display: block;
+  }
+}
+</style>
+
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <script>
+ function toggle_visibility(id) {
+ 	x=document.getElementById("clear");
+ 	for(var i=0;i<x.childElementCount;i++){
+ 		if(x.children[i].style.display=="block"){
+ 				x.children[i].style.display="none";
+ 			}
+ 		}
+ 	console.log(id.style.display);
+ 	id.style.display="block";
+  }
+  function di(){
+  		x=document.getElementById("clear");
+ 	for(var i=0;i<x.childElementCount;i++){
+ 		if(x.children[i].style.display=="block"){
+ 				x.children[i].style.display="none";
+ 			}
+ 		}
+  	var val=document.getElementById('tags').value;
+  	var val1=document.getElementById(val);
+  	val1.style.display="block";
+  	  }
+
+    </script>
+
+</head>
+<body>
+	<h1 style="margin-left:530px;margin-top:50px;color:#3f3f3f;">EDUCATION PORTAL</h1>
+
+
+
+<form>
+  <input id='tags' type="text" name="search" placeholder="Search..">
+  <input type="button" value="search" onclick="di();">
+</form>
+
+
+<div id="clear" style="margin-left:600px">
+{% for i in cat %}
+<div id="{{i.sname}}"  style="display:none">
+	<p>
+		<b>Type:</b>{{i.stype}}<br>
+		<b>Location:</b>{{i.slocation}}<br>
+		<b>Url:</b><a href="{{i.sweb}}">{{i.sweb}}</a><br>
+
+		<b>Ratings:</b><i>{{i.sratings}}</i></a>
+	</p>
+</div>
+{% endfor %}
+</div>
+
+
+
+<h2 style="margin-left:280px;margin-top:80px;color:#000;">List of top institutions</h2>
+<div class="wrapper">
+  
+  <div class="table">
+    
+    <div class="row header">
+      <div class="cell">
+        Name
+      </div>
+      <div class="cell">
+        Type
+      </div>
+      <div class="cell">
+        Location
+      </div>
+        <div class="cell">
+        Website
+      </div>
+      <div class="cell">
+        Ratings
+      </div>
+    </div>
+    {% for i in cat %}
+    {% if forloop.counter < 6 %}
+    <div class="row">
+    <div class="cell">
+        {{i.sname}}
+      </div>
+    
+      <div class="cell">
+        {{i.stype}}
+      </div>
+      <div class="cell">
+       {{i.slocation}}
+             </div>
+      <div class="cell">
+      {{i.sweb}}
+      </div>
+      <div class="cell">
+       {{i.sratings}}
+      </div>
+   
+    </div>
+    {% endif %}
+      {% endfor %}
+   
+    
+   
+  
+    </div>
+    
+  </div>
+  
+  
+</div>
+</body>
+</html>
