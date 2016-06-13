@@ -1,0 +1,4 @@
+Python dependencies:
+  Django
+  Pillow
+  Pip
