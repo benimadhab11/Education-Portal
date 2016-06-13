@@ -1,4 +1,6 @@
-Python dependencies:
-  Django
-  Pillow
-  Pip
+#
+####### example-requirements.txt #######
+#
+###### Requirements without Version Specifiers ######
+django
+pillow
